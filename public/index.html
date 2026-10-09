@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Map Pointer</title>
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <header class="sidebar-head">
+        <h1>Map Pointer</h1>
+        <p class="muted">Click the map to drop a pin. Pins are saved on the server.</p>
+      </header>
+
+      <section class="panel">
+        <label class="field-label" for="search-input">Search a place (OpenStreetMap)</label>
+        <form id="search-form" class="search-row" autocomplete="off">
+          <input id="search-input" type="search" placeholder="e.g. Eiffel Tower, Paris" />
+          <button type="submit" class="btn btn-primary">Go</button>
+        </form>
+        <ul id="search-results" class="search-results" hidden></ul>
+        <button id="locate-btn" class="btn btn-ghost locate" type="button">
+          Use my location (GPS)
+        </button>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Pins (<span id="pin-count">0</span>)</h2>
+          <div class="panel-actions">
+            <button id="fit-btn" class="btn btn-ghost" type="button" title="Zoom to fit all pins">Fit</button>
+            <button id="export-btn" class="btn btn-ghost" type="button" title="Download pins as GeoJSON">Export</button>
+            <button id="import-btn" class="btn btn-ghost" type="button" title="Load pins from a GeoJSON file">Import</button>
+            <input id="import-file" type="file" accept=".geojson,.json,application/geo+json,application/json" hidden />
+            <button id="clear-btn" class="btn btn-danger-ghost" type="button" title="Delete all pins">Clear</button>
+          </div>
+        </div>
+        <ul id="pin-list" class="pin-list"></ul>
+        <p id="empty-state" class="muted empty">No pins yet — click anywhere on the map.</p>
+      </section>
+
+      <footer class="sidebar-foot muted">
+        Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors
+      </footer>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map"></div>
+      <div id="toast" class="toast" hidden></div>
+    </main>
+  </div>
+
+  <!-- Add / edit pin dialog -->
+  <dialog id="pin-dialog" class="dialog">
+    <form id="pin-form" method="dialog">
+      <h2 id="dialog-title">Add pin</h2>
+
+      <label class="field-label" for="pin-title">Title *</label>
+      <input id="pin-title" name="title" maxlength="120" required />
+
+      <label class="field-label" for="pin-description">Description</label>
+      <textarea id="pin-description" name="description" rows="3" maxlength="2000"></textarea>
+
+      <div class="grid-2">
+        <div>
+          <label class="field-label" for="pin-lat">Latitude *</label>
+          <input id="pin-lat" name="lat" type="number" step="any" min="-90" max="90" required />
+        </div>
+        <div>
+          <label class="field-label" for="pin-lng">Longitude *</label>
+          <input id="pin-lng" name="lng" type="number" step="any" min="-180" max="180" required />
+        </div>
+      </div>
+
+      <label class="field-label" for="pin-color">Colour</label>
+      <select id="pin-color" name="color">
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="orange">Orange</option>
+        <option value="purple">Purple</option>
+        <option value="gray">Gray</option>
+      </select>
+
+      <p id="dialog-error" class="error" hidden></p>
+
+      <div class="dialog-actions">
+        <button type="button" id="dialog-cancel" class="btn btn-ghost">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save pin</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+  <script src="/js/app.js" type="module"></script>
+</body>
+</html>

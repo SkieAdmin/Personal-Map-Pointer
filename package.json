@@ -1,0 +1,18 @@
+{
+  "name": "map-pointer",
+  "version": "1.0.0",
+  "description": "Mark and manage multiple map pins using OpenStreetMap (Leaflet + Nominatim) with an Express REST API",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test test/pluscode.test.mjs test/intersection.test.mjs test/geojson.test.mjs test/store.test.mjs"
+  },
+  "keywords": ["openstreetmap", "leaflet", "express", "markers", "map"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
+  }
+}

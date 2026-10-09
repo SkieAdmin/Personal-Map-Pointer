@@ -1,0 +1,8 @@
+node_modules/
+data/map-pointer.db
+data/map-pointer.db-wal
+data/map-pointer.db-shm
+data/markers.json
+data/markers.json.migrated
+.env
+*.log
